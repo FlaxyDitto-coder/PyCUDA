@@ -130,37 +130,3 @@ This project is a scaffold. If you want native GPU support we can:
 
 Pull requests, issues and feature requests welcome.
 
-
-Publishing `pycu-cpu` and `pycu-cuda`
-----------------------------------
-
-This repo can be published as two separate PyPI packages while keeping the
-import name as `pycu` (the distribution name and import package name are
-independent). Two sample pyproject files are provided: `pyproject_cpu.toml`
-and `pyproject_cuda.toml`.
-
-Build and upload `pycu-cpu`:
-
-```powershell
-# switch to cpu pyproject
-copy pyproject_cpu.toml pyproject.toml /Y
-python -m build
-# set env vars securely before upload
-$env:TWINE_USERNAME = "__token__"
-$env:TWINE_PASSWORD = "<YOUR_TOKEN>"
-python -m twine upload --repository pypi --verbose dist/*
-```
-
-Build and upload `pycu-cuda`:
-
-```powershell
-# switch to cuda pyproject
-copy pyproject_cuda.toml pyproject.toml /Y
-python -m build
-# set TWINE_USERNAME/TWINE_PASSWORD as above
-python -m twine upload --repository pypi --verbose dist/*
-```
-
-Important: create a fresh PyPI API token for each upload (do not reuse the
-exposed token), use `__token__` as the username and the token string as the
-password, and never paste tokens into public chat.
